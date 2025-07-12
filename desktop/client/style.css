@@ -1,0 +1,144 @@
+/* Reset dasar dan font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #000;
+  color: white;
+}
+
+/* Video background */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Login box container */
+.login-box {
+  width: 100%;
+  max-width: 380px;
+  margin: 10vh auto;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Logo styling */
+.logo {
+  width: 240px;
+  margin-bottom: 1.5rem;
+}
+
+/* Online user count */
+.online-count {
+  color: #ccc;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Login buttons */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btn.fb {
+  background-color: #3b5998;
+  color: white;
+}
+
+.login-btn.fb:hover {
+  background-color: #2d4373;
+}
+
+.login-btn.google {
+  background-color: #db4437;
+  color: white;
+}
+
+.login-btn.google:hover {
+  background-color: #c1352a;
+}
+
+/* Checkbox and terms */
+.terms-check {
+  font-size: 0.85rem;
+  text-align: left;
+  margin-top: 20px;
+  color: #ccc;
+}
+
+.terms-check input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.1);
+}
+
+.terms-check a {
+  color: #6abcf5;
+  text-decoration: none;
+}
+
+.terms-check a:hover {
+  text-decoration: underline;
+}
+
+/* Terms Page */
+.terms-body {
+  background: #1d58d7;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.terms-container {
+  max-width: 500px;
+  background: rgba(21, 21, 21, 0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.terms-container h1 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.terms-container ul {
+  text-align: left;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  padding-left: 1.2rem;
+}
+
+.terms-container a {
+  color: #6abcf5;
+  text-decoration: none;
+}
+
+.terms-container a:hover {
+  text-decoration: underline;
+}

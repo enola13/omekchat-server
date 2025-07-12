@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - OmekChat</title>
+
+    <style>
+      /* [CSS TETAP] */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: "Segoe UI", sans-serif;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      #bg-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .login-box {
+        background: rgba(0, 0, 0, 0.75);
+        padding: 30px 25px;
+        border-radius: 12px;
+        max-width: 420px;
+        width: 90%;
+        margin: 10vh auto;
+        color: white;
+        text-align: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .logo img {
+        height: 220px;
+      }
+
+      .online-count {
+        color: #bbb;
+        margin-bottom: 10px;
+      }
+
+      .login-box h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .login-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .login-btn.fb {
+        background-color: #3b5998;
+        color: white;
+      }
+
+      .login-btn.google {
+        background-color: #db4437;
+        color: white;
+      }
+
+      .terms-check {
+        font-size: 0.85rem;
+        text-align: left;
+        margin-top: 20px;
+        color: #eee;
+      }
+
+      .terms-check input {
+        margin-right: 5px;
+      }
+
+      .terms-check a {
+        color: #6abcf5;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <video autoplay muted loop id="bg-video">
+      <source src="bg-login.mp4" type="video/mp4" />
+      Browser Anda tidak mendukung video latar.
+    </video>
+
+    <div class="login-box">
+      <div class="logo">
+        <img src="logo.png" alt="OmekChat" />
+      </div>
+
+      <div class="online-count">0 Pengguna Online</div>
+
+      <h2>Selamat datang di <b>OmekChat</b></h2>
+
+      <button class="login-btn fb" id="facebookLogin">
+        Masuk dengan Facebook
+      </button>
+      <button class="login-btn google" id="googleLogin">
+        Masuk dengan Google
+      </button>
+
+      <div class="terms-check">
+        <label>
+          <input type="checkbox" id="agreeCheckbox" />
+          Saya mengonfirmasi bahwa saya berusia minimal 18 tahun. <br />
+          Saya menyetujui
+          <a href="terms.html" target="_blank">Persetujuan Pengguna</a>.
+        </label>
+      </div>
+    </div>
+
+    <script type="module">
+      import { loginWithGoogle, loginWithFacebook } from "./auth.js";
+
+      document
+        .getElementById("googleLogin")
+        .addEventListener("click", loginWithGoogle);
+      document
+        .getElementById("facebookLogin")
+        .addEventListener("click", loginWithFacebook);
+    </script>
+  </body>
+</html>
