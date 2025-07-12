@@ -8,8 +8,8 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // ✅ Serve static files dari desktop dan mobile
-app.use("/desktop", express.static(path.join(__dirname, "../desktop/client")));
-app.use("/mobile", express.static(path.join(__dirname, "../mobile/client")));
+app.use("/desktop", express.static(path.join(__dirname, "/desktop/client")));
+app.use("/mobile", express.static(path.join(__dirname, "/mobile/client")));
 
 // ✅ Redirect root ke versi sesuai device
 app.get("/", (req, res) => {
@@ -21,11 +21,11 @@ app.get("/", (req, res) => {
 
 // ✅ Akses langsung /desktop dan /mobile
 app.get("/desktop", (req, res) => {
-  res.sendFile(path.join(__dirname, "../desktop/client/index.html"));
+  res.sendFile(path.join(__dirname, "/desktop/client/index.html"));
 });
 
 app.get("/mobile", (req, res) => {
-  res.sendFile(path.join(__dirname, "../mobile/client/index.html"));
+  res.sendFile(path.join(__dirname, "/mobile/client/index.html"));
 });
 
 // ✅ Socket handlers
