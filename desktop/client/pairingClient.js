@@ -186,7 +186,7 @@ function createPeerConnection(isInitiator) {
    6️⃣  SOCKET.IO
 ============================================================= */
 function initSocket() {
-  socket = io();
+  socket = io("https://omekchat-server-production.up.railway.app");
   console.log("📡 Socket connected");
 
   function sendSkip() {
