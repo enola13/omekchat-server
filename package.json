@@ -2,9 +2,9 @@
   "name": "ome-tv-clone",
   "version": "1.0.0",
   "description": "1-on-1 random video chat app like OmeTV using WebRTC + Node.js + Socket.io",
-  "main": "server/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
