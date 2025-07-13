@@ -1,0 +1,15 @@
+{
+  "name": "omekchat-mobile",
+  "version": "1.0.0",
+  "description": "OmekChat Mobile APK build with Cordova",
+  "author": "Enola13",
+  "license": "MIT",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {
+    "cordova-android": "^14.0.1"
+  }
+}

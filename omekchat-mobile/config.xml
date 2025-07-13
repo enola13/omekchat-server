@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.omekchat.app" version="1.0.0"
+  xmlns:cdv="http://cordova.apache.org/ns/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <name>OmekChat</name>
+  <description>OmekChat Video Chat Mobile APK</description>
+  <author email="enola13@example.com" href="https://omekchat.web.app">
+    Enola13
+  </author>
+
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-navigation href="*" />
+  <allow-intent href="*" />
+  <preference name="Fullscreen" value="true" />
+  <preference name="Orientation" value="portrait" />
+
+  <platform name="android">
+    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.CAMERA" />
+      <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    </edit-config>
+  </platform>
+
+</widget>

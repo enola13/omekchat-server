@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OmekChat - Chat</title>
+    <script type="module">
+      import { requireAuth } from "./auth.js";
+      requireAuth(); // Redirect ke login jika belum login
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        font-family: "Segoe UI", sans-serif;
+        background: #000;
+        overflow: hidden;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+      }
+
+      .partner-video {
+        flex: 4;
+        position: relative;
+        background: #004aad;
+      }
+
+      #partnerVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+      }
+
+      #brandingContent {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        z-index: 1;
+        text-align: center;
+      }
+
+      #statusText {
+        margin-top: 8px;
+        font-size: 1rem;
+      }
+
+      #userCount {
+        position: absolute;
+        bottom: 10px;
+        font-size: 0.9rem;
+      }
+
+      .chat-area {
+        flex: 4;
+        background: #eeeeee;
+        overflow-y: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      .bubble-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .msg {
+        max-width: 75%;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        word-wrap: break-word;
+        line-height: 1.4;
+        display: inline-block;
+        border-radius: 18px;
+        margin-bottom: 4px;
+      }
+
+      .msg.partner {
+        align-self: flex-start;
+        text-align: left;
+        background: #2e89ff;
+        color: white;
+        border-top-left-radius: 4px;
+      }
+
+      .msg.me {
+        align-self: flex-end;
+        text-align: right;
+        background: #2e89ff;
+        color: white;
+        border-top-right-radius: 4px;
+      }
+
+      .controls {
+        flex: 2;
+        background: #fff;
+        display: flex;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 10px;
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      .local-video {
+        position: relative;
+        width: 90px;
+        height: 90px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: black;
+        margin-top: 5px;
+      }
+
+      #localVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .switch-btn {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: rgba(255, 255, 255, 0.85);
+        color: #000;
+        font-size: 14px;
+        padding: 4px 8px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .right-side {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .message-input {
+        padding: 8px 10px;
+        font-size: 1rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        width: 100%;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 10px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .btn.start {
+        background: #2196f3;
+      }
+
+      .btn.stop {
+        background: #e53935;
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #termsOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .terms-box {
+        background: #222;
+        padding: 2rem;
+        border-radius: 12px;
+        color: white;
+        text-align: left;
+        max-width: 90%;
+      }
+
+      .terms-box h2 {
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .terms-box ul {
+        padding-left: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .accept-btn {
+        padding: 0.7rem;
+        width: 100%;
+        background: #e53935;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="partner-video">
+        <video id="partnerVideo" autoplay playsinline></video>
+        <div id="brandingContent">
+          <h1>OmekChat</h1>
+          <p id="statusText"></p>
+          <p id="userCount">10 Pengguna Online</p>
+        </div>
+      </div>
+
+      <div class="chat-area" id="chatArea">
+        <div class="bubble-container" id="bubbleContainer"></div>
+      </div>
+
+      <div class="controls">
+        <div class="local-video">
+          <video id="localVideo" autoplay muted playsinline></video>
+          <button class="switch-btn" id="switchCameraBtn">🔄</button>
+        </div>
+        <div class="right-side">
+          <input
+            id="chatInput"
+            class="message-input"
+            type="text"
+            placeholder="ketik pesan kamu ..."
+            disabled
+          />
+          <div class="buttons">
+            <button id="stopBtn" class="btn stop" disabled>Stop</button>
+            <button id="startBtn" class="btn start" disabled>Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="termsOverlay">
+      <div class="terms-box">
+        <h2>Syarat & Ketentuan</h2>
+        <ul>
+          <li>Saya berusia minimal 18 tahun</li>
+          <li>Tidak akan menyebar konten negatif</li>
+          <li>Menyetujui kebijakan & aturan</li>
+        </ul>
+        <button class="accept-btn" id="acceptTermsBtn">
+          Setuju & Lanjutkan
+        </button>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="pairingClient.js"></script>
+  </body>
+</html>
