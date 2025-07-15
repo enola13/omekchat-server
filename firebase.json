@@ -14,6 +14,18 @@
       {
         "source": "/mobile",
         "destination": "/mobile/index.html"
+      },
+      {
+        "source": "/auth.js",
+        "destination": "/desktop/auth.js"
+      },
+      {
+        "source": "/logo.png",
+        "destination": "/desktop/logo.png"
+      },
+      {
+        "source": "/bg-login.mp4",
+        "destination": "/desktop/bg-login.mp4"
       }
     ]
   }
