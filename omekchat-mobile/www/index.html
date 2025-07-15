@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - OmekChat</title>
+
+    <!-- Cordova + auth.js -->
+    <script src="cordova.js"></script>
+    <script src="auth.js"></script>
+
     <style>
-      /* [CSS TETAP] */
       * {
         margin: 0;
         padding: 0;
@@ -45,7 +49,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
         margin-bottom: 20px;
       }
 
@@ -73,11 +76,6 @@
         border-radius: 6px;
         cursor: pointer;
         transition: 0.2s ease;
-      }
-
-      .login-btn.fb {
-        background-color: #3b5998;
-        color: white;
       }
 
       .login-btn.google {
@@ -119,9 +117,6 @@
       <button class="login-btn google" id="googleLogin">
         Login with Google
       </button>
-      <button class="login-btn fb" id="facebookLogin">
-        Masuk dengan Facebook
-      </button>
 
       <div class="terms-check">
         <label>
@@ -133,15 +128,12 @@
       </div>
     </div>
 
-    <!-- Firebase Login Logic Only (No main.js) -->
-    <script type="module">
-      import { loginWithGoogle, loginWithFacebook } from "./auth.js";
-      document
-        .getElementById("facebookLogin")
-        .addEventListener("click", loginWithFacebook);
-      document
-        .getElementById("googleLogin")
-        .addEventListener("click", loginWithGoogle);
+    <script>
+      document.addEventListener("deviceready", function () {
+        document
+          .getElementById("googleLogin")
+          .addEventListener("click", loginWithGoogle);
+      });
     </script>
   </body>
 </html>

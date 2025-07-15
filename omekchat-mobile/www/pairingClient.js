@@ -52,7 +52,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 /* =============================================================
    2️⃣  KAMERA & MIKROFON
-============================================================= */
+   ============================================================= */
+document.addEventListener("deviceready", () => {
+  const permissions = cordova.plugins.permissions;
+
+  permissions.requestPermissions(
+    [permissions.CAMERA, permissions.RECORD_AUDIO],
+    function (status) {
+      if (status.hasPermission) {
+        console.log("📷 Izin kamera dan audio diberikan");
+        startCamera(); // <- fungsi kamu untuk memulai kamera
+      } else {
+        alert("🚫 Izin kamera atau audio ditolak");
+      }
+    },
+    function (err) {
+      console.warn("❌ Gagal meminta izin", err);
+    }
+  );
+});
+
 async function startCamera(mode) {
   try {
     if (localStream) {

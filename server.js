@@ -7,11 +7,11 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// ✅ Serve static files dari desktop dan mobile
+// ✅ Serve static files
 app.use("/desktop", express.static(path.join(__dirname, "/desktop/client")));
 app.use("/mobile", express.static(path.join(__dirname, "/mobile/client")));
 
-// ✅ Redirect root ke versi sesuai device
+// ✅ Root redirect
 app.get("/", (req, res) => {
   const ua = req.headers["user-agent"] || "";
   const isMobile = /mobile|android|iphone|ipad/i.test(ua);
@@ -19,21 +19,9 @@ app.get("/", (req, res) => {
   res.redirect(target);
 });
 
-// ✅ Akses langsung /desktop dan /mobile
-app.get("/desktop", (req, res) => {
-  res.sendFile(path.join(__dirname, "/desktop/client/index.html"));
-});
-
-app.get("/mobile", (req, res) => {
-  res.sendFile(path.join(__dirname, "/mobile/client/index.html"));
-});
-
-// ✅ Socket handlers
+// ✅ Socket & pairing logic
 require("./socketHandler")(io);
-
-// ✅ Pairing logic
-const pairing = require("./pairing");
-pairing.setupPairing(io);
+require("./pairing").setupPairing(io);
 
 // ✅ Jalankan server
 const PORT = 3000;

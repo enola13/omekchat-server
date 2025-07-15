@@ -1,8 +1,23 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.omekchat.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.omekchat.app2" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="GooglePlus">
+        <param name="android-package" value="nl.xservices.plugins.GooglePlus" />
+        <param name="onload" value="true" />
+    </feature>
+    <access origin="https://accounts.google.com/*" />
+    <feature name="FirebasePlugin">
+        <param name="android-package" value="org.apache.cordova.firebase.FirebasePlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
+    </feature>
     <name>OmekChat</name>
     <description>OmekChat Video Chat Mobile APK</description>
-    <author email="enola13@example.com" href="https://omekchat.web.app">
+    <author email="enola13@example.com" href="https://omekchat.web.app1">
     Enola13
   </author>
     <content src="index.html" />
@@ -15,6 +30,9 @@
         <uses-permission android:name="android.permission.RECORD_AUDIO" />
     </edit-config>
     <preference name="loglevel" value="DEBUG" />
+    <preference name="FIREBASE_MESSAGING_IMMEDIATE_PAYLOAD_DELIVERY" value="false" />
+    <preference name="GradlePluginGoogleServicesEnabled" value="true" />
     <preference name="Fullscreen" value="true" />
     <preference name="Orientation" value="portrait" />
+    <preference name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.1002312804738-iv39g70pb6ndq5t6nvbpgtjpbc4lvn98" />
 </widget>

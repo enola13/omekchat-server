@@ -1,68 +1,29 @@
-// auth.js (dipakai oleh index.html dan chat.html)
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signOut,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-
-// Firebase config Anda
-const firebaseConfig = {
-  apiKey: "AIzaSyC9dObTgWdquVxDoWadHsNQXGG5RNRaltQ",
-  authDomain: "omekchat.firebaseapp.com",
-  projectId: "omekchat",
-  storageBucket: "omekchat.appspot.com",
-  messagingSenderId: "676046409566",
-  appId: "1:676046409566:web:66d61118c3d275231bc9cf",
-  measurementId: "G-6WG78XDYVQ",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
-
-// Fungsi login Facebook
-export function loginWithFacebook() {
+window.loginWithGoogle = function () {
   const checkbox = document.getElementById("agreeCheckbox");
-  if (!checkbox.checked) {
-    alert("Harap centang konfirmasi sebelum masuk.");
+  if (!checkbox?.checked) {
+    alert("Harap centang dulu syarat & ketentuan.");
     return;
   }
 
-  signInWithPopup(auth, facebookProvider)
-    .then(() => (window.location.href = "chat.html"))
-    .catch((error) => alert("Login Facebook gagal: " + error.message));
-}
-// Fungsi login Google
-export function loginWithGoogle() {
-  const checkbox = document.getElementById("agreeCheckbox");
-  if (!checkbox.checked) {
-    alert("Harap centang konfirmasi sebelum masuk.");
+  if (!window.plugins || !window.plugins.googleplus) {
+    alert("❌ Plugin GooglePlus tidak aktif atau belum siap.");
     return;
   }
 
-  signInWithPopup(auth, googleProvider)
-    .then(() => (window.location.href = "chat.html"))
-    .catch((error) => alert("Login Google gagal: " + error.message));
-}
-
-// Cek apakah user sudah login (untuk dipanggil dari chat.html)
-export function requireAuth() {
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "index.html";
+  window.plugins.googleplus.login(
+    {
+      webClientId:
+        "1002312804738-7hlqdgbs2n0m5dcso852onr8no9qoq27.apps.googleusercontent.com",
+      // Ganti jika perlu
+      offline: true,
+      scopes: "profile email",
+    },
+    function (userData) {
+      alert("✅ Login Berhasil:\n" + JSON.stringify(userData));
+      window.location.href = "chat.html";
+    },
+    function (error) {
+      alert("❌ Login Gagal:\n" + JSON.stringify(error));
     }
-  });
-}
-
-// Logout (opsional)
-export function logout() {
-  signOut(auth)
-    .then(() => (window.location.href = "index.html"))
-    .catch((error) => alert("Logout gagal: " + error.message));
-}
+  );
+};

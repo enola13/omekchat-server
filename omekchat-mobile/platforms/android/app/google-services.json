@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1002312804738",
+    "project_id": "omekchatweb",
+    "storage_bucket": "omekchatweb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002312804738:android:05c23f490398102e66079b",
+        "android_client_info": {
+          "package_name": "com.omekchat.app2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002312804738-p9pmepepo1re2e6k1jf0ihethfueni66.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omekchat.app2",
+            "certificate_hash": "c7a059d4dc562c4b3510ec788d0db23950df2d25"
+          }
+        },
+        {
+          "client_id": "1002312804738-7hlqdgbs2n0m5dcso852onr8no9qoq27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIrOrg7Von3C8Kf5pZKWE7H2blyLw8ju8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002312804738-7hlqdgbs2n0m5dcso852onr8no9qoq27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

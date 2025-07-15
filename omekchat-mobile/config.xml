@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.omekchat.app" version="1.0.0"
+<widget id="com.omekchat.app2" version="1.0.0"
   xmlns:cdv="http://cordova.apache.org/ns/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <name>OmekChat</name>
   <description>OmekChat Video Chat Mobile APK</description>
-  <author email="enola13@example.com" href="https://omekchat.web.app">
+  <author email="enola13@example.com" href="https://omekchat.web.app1">
     Enola13
   </author>
 
@@ -17,6 +17,7 @@
   <preference name="Orientation" value="portrait" />
 
   <platform name="android">
+  <preference name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.1002312804738-iv39g70pb6ndq5t6nvbpgtjpbc4lvn98" />
     <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.CAMERA" />
