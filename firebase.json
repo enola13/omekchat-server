@@ -26,6 +26,10 @@
       {
         "source": "/bg-login.mp4",
         "destination": "/desktop/bg-login.mp4"
+      },
+      {
+        "source": "/desktop/pairingClient.js",
+        "destination": "/desktop/pairingClient.js"
       }
     ]
   }
