@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/desktop/logo.png" />
+
     <title>OmekChat - Chat</title>
     <script type="module">
-      import { requireAuth } from "./auth.js";
+      import { requireAuth } from "/mobile/auth.js";
       requireAuth(); // Redirect ke login jika belum login
     </script>
 
@@ -282,8 +284,8 @@
       </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="pairingClient.js"></script>
+    <script src="https://omekchat-server-production.up.railway.app/socket.io/socket.io.js"></script>
+    <script src="/mobile/pairingClient.js"></script>
     <script data-cfasync="false" type="text/javascript">
       (() => {
         var K =

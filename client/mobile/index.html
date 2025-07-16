@@ -99,13 +99,13 @@
   </head>
   <body>
     <video autoplay muted loop id="bg-video">
-      <source src="bg-login.mp4" type="video/mp4" />
+      <source src="/mobile/bg-login.mp4" type="video/mp4" />
       Browser Anda tidak mendukung video latar.
     </video>
 
     <div class="login-box">
       <div class="logo">
-        <img src="logo.png" alt="OmekChat" />
+        <img src="/mobile/logo.png" alt="OmekChat" />
       </div>
 
       <div class="online-count">0 Pengguna Online</div>
@@ -127,7 +127,7 @@
 
     <!-- Firebase Login Logic Only (No main.js) -->
     <script type="module">
-      import { loginWithGoogle, loginWithFacebook } from "./auth.js";
+      import { loginWithGoogle, loginWithFacebook } from "/mobile/auth.js";
       document
         .getElementById("facebookLogin")
         .addEventListener("click", loginWithFacebook);
