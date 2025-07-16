@@ -1,33 +1,19 @@
 {
   "hosting": {
-    "public": "client",
+    "public": ".",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
-      { "source": "/", "destination": "/index.html" },
-      { "source": "/desktop", "destination": "/desktop/index.html" },
-      { "source": "/desktop/chat.html", "destination": "/desktop/chat.html" },
-      { "source": "/desktop/auth.js", "destination": "/desktop/auth.js" },
-      { "source": "/desktop/logo.png", "destination": "/desktop/logo.png" },
       {
-        "source": "/desktop/bg-login.mp4",
-        "destination": "/desktop/bg-login.mp4"
+        "source": "/",
+        "destination": "/index.html"
       },
       {
-        "source": "/desktop/pairingClient.js",
-        "destination": "/desktop/pairingClient.js"
-      },
-
-      { "source": "/mobile", "destination": "/mobile/index.html" },
-      { "source": "/mobile/chat.html", "destination": "/mobile/chat.html" },
-      { "source": "/mobile/auth.js", "destination": "/mobile/auth.js" },
-      { "source": "/mobile/logo.png", "destination": "/mobile/logo.png" },
-      {
-        "source": "/mobile/bg-login.mp4",
-        "destination": "/mobile/bg-login.mp4"
+        "source": "/desktop/**",
+        "destination": "/client/desktop/index.html"
       },
       {
-        "source": "/mobile/pairingClient.js",
-        "destination": "/mobile/pairingClient.js"
+        "source": "/mobile/**",
+        "destination": "/client/mobile/index.html"
       }
     ]
   }
