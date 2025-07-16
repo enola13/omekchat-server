@@ -130,15 +130,17 @@
     <script type="module">
       import { loginWithGoogle, loginWithFacebook } from "./auth.js";
 
-      const googleBtn = document.getElementById("googleLogin");
-      if (googleBtn) {
-        googleBtn.addEventListener("click", loginWithGoogle);
-      }
+      document.addEventListener("DOMContentLoaded", () => {
+        const googleBtn = document.getElementById("googleLogin");
+        if (googleBtn) {
+          googleBtn.addEventListener("click", loginWithGoogle);
+        }
 
-      const facebookBtn = document.getElementById("facebookLogin");
-      if (facebookBtn) {
-        facebookBtn.addEventListener("click", loginWithFacebook);
-      }
+        const facebookBtn = document.getElementById("facebookLogin");
+        if (facebookBtn) {
+          facebookBtn.addEventListener("click", loginWithFacebook);
+        }
+      });
     </script>
 
     <script data-cfasync="false" type="text/javascript">
