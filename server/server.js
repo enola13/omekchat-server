@@ -6,10 +6,10 @@ const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 
-// 🔐 Izinkan koneksi dari Firebase Hosting
+// Konfigurasi CORS agar socket bisa akses dari Firebase Hosting
 const io = new Server(server, {
   cors: {
-    origin: "https://omekchatweb.web.app", // ganti jika domain custom
+    origin: "https://omekchatweb.web.app", // ✅ asal frontend kamu
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -17,23 +17,24 @@ const io = new Server(server, {
 
 app.use(cors());
 
-// 🧪 Route Tes
+// Cek koneksi server dari browser
 app.get("/", (req, res) => {
   res.send("✅ OmekChat Server Aktif");
 });
 
-// 🔌 Socket Logic
+// Socket logic
 io.on("connection", (socket) => {
-  console.log("🔌 Pengguna terhubung:", socket.id);
+  console.log("🔌 User terhubung:", socket.id);
 
   socket.on("disconnect", () => {
-    console.log("❌ Pengguna keluar:", socket.id);
+    console.log("❌ User keluar:", socket.id);
   });
 
-  // Tambahkan event lainnya (pairing, message, dll)
+  // Tambahkan event lain sesuai kebutuhan
 });
 
+// WAJIB! Biarkan Railway tentukan port-nya
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`🚀 Server berjalan di port ${PORT}`);
+  console.log(`🚀 Server aktif di port ${PORT}`);
 });
