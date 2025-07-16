@@ -3,10 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="monetag" content="969ac6fd84dec43c05a17a412cd9509c" />
     <title>Login - OmekChat</title>
     <style>
-      /* [CSS TETAP] */
       * {
         margin: 0;
         padding: 0;
@@ -40,6 +38,8 @@
         margin: 10vh auto;
         color: white;
         text-align: center;
+        z-index: 1; /* ✅ Tambahan penting */
+        position: relative;
       }
 
       .logo {
@@ -101,7 +101,6 @@
   <body>
     <video autoplay muted loop id="bg-video">
       <source src="/mobile/bg-login.mp4" type="video/mp4" />
-      Browser Anda tidak mendukung video latar.
     </video>
 
     <div class="login-box">
@@ -126,9 +125,8 @@
       </div>
     </div>
 
-    <!-- Firebase Login Logic Only (No main.js) -->
     <script type="module">
-      import { loginWithGoogle, loginWithFacebook } from "./auth.js";
+      import { loginWithGoogle } from "./auth.js";
 
       document.addEventListener("DOMContentLoaded", () => {
         const googleBtn = document.getElementById("googleLogin");
