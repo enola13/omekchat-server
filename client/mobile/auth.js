@@ -12,13 +12,13 @@ import {
 
 // Firebase config Anda
 const firebaseConfig = {
-  apiKey: "AIzaSyC9dObTgWdquVxDoWadHsNQXGG5RNRaltQ",
-  authDomain: "omekchat.firebaseapp.com",
-  projectId: "omekchat",
-  storageBucket: "omekchat.appspot.com",
-  messagingSenderId: "676046409566",
-  appId: "1:676046409566:web:66d61118c3d275231bc9cf",
-  measurementId: "G-6WG78XDYVQ",
+  apiKey: "AIzaSyD5v1T6vbwHCa_y6BIwXO8qCvJuo-hQD60",
+  authDomain: "omekchatweb.firebaseapp.com",
+  projectId: "omekchatweb",
+  storageBucket: "omekchatweb.firebasestorage.app",
+  messagingSenderId: "1002312804738",
+  appId: "1:1002312804738:web:ca7b2149d3f30d6566079b",
+  measurementId: "G-B2BTJYE1M5",
 };
 
 const app = initializeApp(firebaseConfig);
