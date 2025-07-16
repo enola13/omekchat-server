@@ -12,8 +12,20 @@
         "destination": "/desktop/index.html"
       },
       {
+        "source": "/desktop/chat.html",
+        "destination": "/desktop/chat.html"
+      },
+      {
         "source": "/mobile",
         "destination": "/mobile/index.html"
+      },
+      {
+        "source": "/mobile/chat.html",
+        "destination": "/mobile/chat.html"
+      },
+      {
+        "source": "/chat.html",
+        "destination": "/mobile/chat.html"
       },
       {
         "source": "/auth.js",
