@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
   // Tambahkan event lainnya di sini
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`🚀 Server berjalan di port ${PORT}`);
+  console.log(`Server berjalan di port ${PORT}`);
 });
