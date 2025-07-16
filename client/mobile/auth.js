@@ -26,18 +26,6 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-// Fungsi login Facebook
-export function loginWithFacebook() {
-  const checkbox = document.getElementById("agreeCheckbox");
-  if (!checkbox.checked) {
-    alert("Harap centang konfirmasi sebelum masuk.");
-    return;
-  }
-
-  signInWithPopup(auth, facebookProvider)
-    .then(() => (window.location.href = "/mobile/chat.html"))
-    .catch((error) => alert("Login Facebook gagal: " + error.message));
-}
 // Fungsi login Google
 export function loginWithGoogle() {
   const checkbox = document.getElementById("agreeCheckbox");
