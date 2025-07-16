@@ -35,7 +35,7 @@ export function loginWithFacebook() {
   }
 
   signInWithPopup(auth, facebookProvider)
-    .then(() => (window.location.href = "chat.html"))
+    .then(() => (window.location.href = "/mobile/chat.html"))
     .catch((error) => alert("Login Facebook gagal: " + error.message));
 }
 // Fungsi login Google

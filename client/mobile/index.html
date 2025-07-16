@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="monetag" content="969ac6fd84dec43c05a17a412cd9509c" />
     <title>Login - OmekChat</title>
     <style>
       /* [CSS TETAP] */
@@ -127,7 +128,7 @@
 
     <!-- Firebase Login Logic Only (No main.js) -->
     <script type="module">
-      import { loginWithGoogle, loginWithFacebook } from "/mobile/auth.js";
+      import { loginWithGoogle, loginWithFacebook } from "./auth.js";
       document
         .getElementById("facebookLogin")
         .addEventListener("click", loginWithFacebook);
