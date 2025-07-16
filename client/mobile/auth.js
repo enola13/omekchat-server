@@ -47,7 +47,7 @@ export function loginWithGoogle() {
   }
 
   signInWithPopup(auth, googleProvider)
-    .then(() => (window.location.href = "chat.html"))
+    .then(() => (window.location.href = "/mobile/chat.html"))
     .catch((error) => alert("Login Google gagal: " + error.message));
 }
 
@@ -55,7 +55,7 @@ export function loginWithGoogle() {
 export function requireAuth() {
   onAuthStateChanged(auth, (user) => {
     if (!user) {
-      window.location.href = "index.html";
+      window.location.href = "/mobile/index.html";
     }
   });
 }
@@ -63,6 +63,6 @@ export function requireAuth() {
 // Logout (opsional)
 export function logout() {
   signOut(auth)
-    .then(() => (window.location.href = "index.html"))
+    .then(() => (window.location.href = "/mobile/index.html"))
     .catch((error) => alert("Logout gagal: " + error.message));
 }
