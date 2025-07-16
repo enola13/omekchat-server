@@ -1,4 +1,4 @@
-const { findPair, removeFromQueue } = require("./pairing");
+const { findPair, removeFromQueue } = require("../pairing");
 
 // Map: socket.id -> socket
 const onlineUsers = new Map();

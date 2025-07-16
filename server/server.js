@@ -6,10 +6,10 @@ const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 
-// ✅ CORS agar bisa menerima request dari web Firebase kamu
+// 🔐 Izinkan koneksi dari Firebase Hosting
 const io = new Server(server, {
   cors: {
-    origin: "https://omekchatweb.web.app",
+    origin: "https://omekchatweb.web.app", // ganti jika domain custom
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -17,12 +17,12 @@ const io = new Server(server, {
 
 app.use(cors());
 
-// Test route (opsional)
+// 🧪 Route Tes
 app.get("/", (req, res) => {
-  res.send("OmekChat Server Aktif");
+  res.send("✅ OmekChat Server Aktif");
 });
 
-// Socket logic
+// 🔌 Socket Logic
 io.on("connection", (socket) => {
   console.log("🔌 Pengguna terhubung:", socket.id);
 
@@ -30,10 +30,10 @@ io.on("connection", (socket) => {
     console.log("❌ Pengguna keluar:", socket.id);
   });
 
-  // Tambahkan event lainnya di sini
+  // Tambahkan event lainnya (pairing, message, dll)
 });
 
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`Server berjalan di port ${PORT}`);
+  console.log(`🚀 Server berjalan di port ${PORT}`);
 });
