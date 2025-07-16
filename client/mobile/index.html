@@ -129,13 +129,18 @@
     <!-- Firebase Login Logic Only (No main.js) -->
     <script type="module">
       import { loginWithGoogle, loginWithFacebook } from "./auth.js";
-      document
-        .getElementById("facebookLogin")
-        .addEventListener("click", loginWithFacebook);
-      document
-        .getElementById("googleLogin")
-        .addEventListener("click", loginWithGoogle);
+
+      const googleBtn = document.getElementById("googleLogin");
+      if (googleBtn) {
+        googleBtn.addEventListener("click", loginWithGoogle);
+      }
+
+      const facebookBtn = document.getElementById("facebookLogin");
+      if (facebookBtn) {
+        facebookBtn.addEventListener("click", loginWithFacebook);
+      }
     </script>
+
     <script data-cfasync="false" type="text/javascript">
       (() => {
         var K =
