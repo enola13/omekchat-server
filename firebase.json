@@ -1,20 +1,11 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "client",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
-      {
-        "source": "/",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/desktop/**",
-        "destination": "/client/desktop/index.html"
-      },
-      {
-        "source": "/mobile/**",
-        "destination": "/client/mobile/index.html"
-      }
+      { "source": "/", "destination": "/index.html" },
+      { "source": "/desktop/**", "destination": "/desktop/index.html" },
+      { "source": "/mobile/**", "destination": "/mobile/index.html" }
     ]
   }
 }
