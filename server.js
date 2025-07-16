@@ -1,30 +1,39 @@
 const express = require("express");
 const http = require("http");
-const path = require("path");
 const { Server } = require("socket.io");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 
-// ✅ Serve static files
-app.use("/desktop", express.static(path.join(__dirname, "/desktop/client")));
-app.use("/mobile", express.static(path.join(__dirname, "/mobile/client")));
-
-// ✅ Root redirect
-app.get("/", (req, res) => {
-  const ua = req.headers["user-agent"] || "";
-  const isMobile = /mobile|android|iphone|ipad/i.test(ua);
-  const target = isMobile ? "/mobile" : "/desktop";
-  res.redirect(target);
+// ✅ CORS agar bisa menerima request dari web Firebase kamu
+const io = new Server(server, {
+  cors: {
+    origin: "https://omekchatweb.web.app",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
 });
 
-// ✅ Socket & pairing logic
-require("./socketHandler")(io);
-require("./pairing").setupPairing(io);
+app.use(cors());
 
-// ✅ Jalankan server
-const PORT = 3000;
-server.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+// Test route (opsional)
+app.get("/", (req, res) => {
+  res.send("OmekChat Server Aktif");
+});
+
+// Socket logic
+io.on("connection", (socket) => {
+  console.log("🔌 Pengguna terhubung:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("❌ Pengguna keluar:", socket.id);
+  });
+
+  // Tambahkan event lainnya di sini
+});
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`🚀 Server berjalan di port ${PORT}`);
 });
