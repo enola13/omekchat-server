@@ -192,6 +192,7 @@ function initSocket() {
     reconnectionAttempts: 5,
     withCredentials: true,
   });
+
   console.log("📡 Socket connected");
 
   function sendSkip() {
