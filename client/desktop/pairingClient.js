@@ -186,7 +186,12 @@ function createPeerConnection(isInitiator) {
    6️⃣  SOCKET.IO
 ============================================================= */
 function initSocket() {
-  socket = io("https://omekchat-server-production.up.railway.app");
+  socket = io("https://omekchat-server-production.up.railway.app", {
+    // ← Edit di sini
+    transports: ["websocket", "polling"],
+    reconnectionAttempts: 5,
+    withCredentials: true,
+  });
   console.log("📡 Socket connected");
 
   function sendSkip() {

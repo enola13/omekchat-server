@@ -17,10 +17,21 @@ app.use(
 
 const io = new Server(server, {
   cors: {
-    origin: "https://omekchatweb.web.app", // ini WAJIB cocok
+    origin: [
+      "https://omekchatweb.web.app", // Domain Firebase
+      "http://localhost:3000", // Development
+    ],
     methods: ["GET", "POST"],
     credentials: true,
+    transports: ["websocket", "polling"], // Tambahkan ini
   },
+  pingTimeout: 60000, // Prevent timeout
+  pingInterval: 25000,
+});
+
+// Tambahkan route health check
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
 });
 
 io.on("connection", (socket) => {
@@ -31,7 +42,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080; // ← Pastikan port sama dengan Railway
 server.listen(PORT, () => {
   console.log(`🚀 Server aktif di port ${PORT}`);
 });
