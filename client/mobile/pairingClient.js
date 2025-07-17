@@ -1,8 +1,6 @@
-// pairingClient.js ── OmekChat FINAL
+// pairingClient.js ── OmekChat FINAL dengan Iklan
 
-/* =============================================================
-   ELEMEN UI
-============================================================= */
+/* =========================== ELEMEN UI =========================== */
 const startBtn = document.getElementById("startBtn");
 const stopBtn = document.getElementById("stopBtn");
 const statusText = document.getElementById("statusText");
@@ -16,10 +14,9 @@ const partnerVideo = document.getElementById("partnerVideo");
 const chatArea = document.getElementById("chatArea");
 const brandingBox = document.getElementById("brandingContent");
 const bubbleContainer = document.getElementById("bubbleContainer");
+const adFrame = document.getElementById("monetagFrame"); // 🔥 iframe iklan
 
-/* =============================================================
-   STATE
-============================================================= */
+/* =========================== STATE =========================== */
 let isConnected = false;
 let isSearching = false;
 let facingMode = "user";
@@ -28,10 +25,9 @@ let socket = null;
 let peer = null;
 let roomID = null;
 let dataChannel = null;
+let adTimeout = null;
 
-/* =============================================================
-   1️⃣  TERMS
-============================================================= */
+/* ===================== 1. TERMS ====================== */
 acceptBtn.onclick = async () => {
   localStorage.setItem("termsAccepted", "true");
   termsOverlay.style.display = "none";
@@ -50,9 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-/* =============================================================
-   2️⃣  KAMERA & MIKROFON
-============================================================= */
+/* ===================== 2. CAMERA ====================== */
 async function startCamera(mode) {
   try {
     if (localStream) {
@@ -85,9 +79,7 @@ switchBtn.onclick = async () => {
   await startCamera(facingMode);
 };
 
-/* =============================================================
-   3️⃣  UI
-============================================================= */
+/* ===================== 3. UI ====================== */
 function updateUIStatus(text, loading = false) {
   statusText.textContent = text;
   statusText.style.display = text ? "block" : "none";
@@ -105,6 +97,14 @@ function hidePartnerMode() {
   brandingBox.style.display = "flex";
 }
 
+function showAdDuringSearch() {
+  if (adFrame) adFrame.style.display = "block";
+}
+
+function hideAd() {
+  if (adFrame) adFrame.style.display = "none";
+}
+
 function setUISearching() {
   isConnected = false;
   isSearching = true;
@@ -114,6 +114,7 @@ function setUISearching() {
   stopBtn.disabled = false;
   chatInput.disabled = true;
   showPartnerMode();
+  showAdDuringSearch();
 }
 
 function setUIConnected() {
@@ -125,6 +126,7 @@ function setUIConnected() {
   stopBtn.disabled = false;
   chatInput.disabled = false;
   showPartnerMode();
+  hideAd();
 }
 
 function setUIDisconnected() {
@@ -136,6 +138,7 @@ function setUIDisconnected() {
   stopBtn.disabled = true;
   chatInput.disabled = true;
   hidePartnerMode();
+  hideAd();
 
   if (dataChannel) {
     dataChannel.close();
@@ -156,9 +159,7 @@ function setUIDisconnected() {
   partnerVideo.srcObject = null;
 }
 
-/* =============================================================
-   5️⃣  PEER CONNECTION
-============================================================= */
+/* ===================== 4. PEER CONNECTION ====================== */
 function createPeerConnection(isInitiator) {
   const pc = new RTCPeerConnection({
     iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
@@ -182,12 +183,9 @@ function createPeerConnection(isInitiator) {
   return pc;
 }
 
-/* =============================================================
-   6️⃣  SOCKET.IO
-============================================================= */
+/* ===================== 5. SOCKET ====================== */
 function initSocket() {
   socket = io("https://omekchat-server-production.up.railway.app", {
-    // ← Edit di sini
     transports: ["websocket", "polling"],
     reconnectionAttempts: 5,
     withCredentials: true,
@@ -195,11 +193,9 @@ function initSocket() {
 
   console.log("📡 Socket connected");
 
-  function sendSkip() {
+  socket.sendSkip = () => {
     if (roomID) socket.emit("skip", { roomID });
-  }
-
-  socket.sendSkip = sendSkip;
+  };
 
   socket.on("skip", () => setUIDisconnected());
   socket.on("user-count", (count) => {
@@ -207,6 +203,7 @@ function initSocket() {
   });
 
   socket.on("partner-found", async ({ roomID: id, initiator }) => {
+    clearTimeout(adTimeout);
     roomID = id;
     peer = createPeerConnection(initiator);
     setUIConnected();
@@ -235,9 +232,7 @@ function initSocket() {
   });
 }
 
-/* =============================================================
-   7️⃣  TOMBOL START / NEXT / STOP
-============================================================= */
+/* ===================== 6. TOMBOL ====================== */
 startBtn.onclick = () => {
   if (startBtn.disabled) return;
   clearChatBubbles();
@@ -247,6 +242,10 @@ startBtn.onclick = () => {
     if (!socket) initSocket();
     else if (!socket.connected) socket.connect();
     socket.emit("find-partner");
+
+    adTimeout = setTimeout(() => {
+      showAdDuringSearch();
+    }, 5000);
   } else {
     socket?.sendSkip();
     setUIDisconnected();
@@ -262,9 +261,7 @@ stopBtn.onclick = () => {
   clearChatBubbles();
 };
 
-/* =============================================================
-   8️⃣  CHAT OUTPUT: BALON PESAN & RESET SAAT NEXT/STOP
-============================================================= */
+/* ===================== 7. CHAT ====================== */
 function initChatChannel(channel) {
   dataChannel = channel;
   dataChannel.onopen = () => (chatInput.disabled = false);
