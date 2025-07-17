@@ -25,13 +25,12 @@ const io = new Server(server, {
   pingInterval: 25000,
 });
 
-// Health check route
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK" });
 });
 
 // ==========================
-// ROOM & PAIRING LOGIC
+// PAIRING DAN LOGIKA CHAT
 // ==========================
 let waitingUser = null;
 let roomCounter = 0;
@@ -58,7 +57,7 @@ io.on("connection", (socket) => {
       socket.data.roomID = roomID;
       waitingUser.data.roomID = roomID;
 
-      // Pasangkan mereka
+      // Pasangkan pengguna
       waitingUser.emit("partner-found", { roomID, initiator: true });
       socket.emit("partner-found", { roomID, initiator: false });
 
